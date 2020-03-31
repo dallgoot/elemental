@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Patua+One&display=swap');
+@import url('./all.min.css');
+@import url('./solid.css');
+
+*{
+    padding:0;
+    margin:0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size:14px;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+	position: relative;
+    padding:0;
+    margin: 0;
+}
+
+body {
+	color: #333;
+ 	box-sizing: border-box;
+	display: grid;
+    grid-template-areas:
+        "tab inf"
+        "filtered inf"
+        "footer footer";
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 8fr 2fr 2em;
+    grid-gap: 0;
+
+    padding:0;
+    margin: 0;
+}
+
+/*a {
+	color: rgb(0,100,200);
+	text-decoration: none;
+}*/
+
+a:hover {
+	text-decoration: underline;
+}
+/*
+a:visited {
+	color: rgb(0,80,160);
+}*/
+
+label {
+	display: block;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+input[type="range"] {
+	height: 0;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+.darkTheme {
+    --commontext-color: rgba(255,255,255,0.85);
+    --accent-color: #49b;
+    --main-background:#334;
+    --title-color: var(--commontext-color);
+    --element-bg:linear-gradient(0deg, rgba(239,244,250,0.4) 0%, rgba(255,255,255,0.25) 25%, rgba(226,236,246,0.6) 100%);
+    --element-border-color:rgba(255,255,255,0.3);
+}
+:root {
+    --commontext-color: rgba(50,50,50,0.75);
+    --accent-color: rgb(68, 133, 187);
+    --main-background:rgb(239, 246, 255);
+    --title-color: var(--accent-color);
+    --element-bg:linear-gradient(0deg, rgba(143, 147, 167, 0.4) 0%, rgba(80, 80, 80, 0.25) 25%, rgba(248,248,246,0.6) 100%);
+    --element-border-color:rgba(0,0,0,0.5);
+}
+body {
+    background-color: var(--main-background)
+}
+
+a, a:visited {
+    color: var(--accent-color);
+}
