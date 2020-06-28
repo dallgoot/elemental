@@ -1,14 +1,8 @@
 <script>
 //    import { selectedElement } from './stores.js';
     import Element from './Element.svelte';
-    import {table} from './stores.js'
+    import {table, getMass} from './stores.js'
 
-    function getMass(element) {
-        if ("atomic" in element && 'weight' in element.atomic) {
-            return parseInt(element.atomic.weight);
-        }
-        return '?';
-    }
 </script>
 
 

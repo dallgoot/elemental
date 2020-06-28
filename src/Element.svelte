@@ -60,7 +60,7 @@ button
         z-index 1
         transform scale(1.4)
         transition-timing-function cubic-bezier(0.735, 0.055, 0.645, 0.960)
-        transition transform 0.8s, box-shadow 0.8s, opacity 0.8s
+        transition transform 0.8s, box-shadow 0.8s, opacity 0.8s, z-index 0.8s
         box-shadow 1px 10px 15px 3px rgba(24, 24, 24, 0.75)
         border 1px solid #fff
         outline none

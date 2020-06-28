@@ -21,24 +21,21 @@
     }
 </script>
 
+<svelte:body class:darkTheme />
 
 <main class:darkTheme>
     <header>
-        <h1>Periodic Table of Elements</h1>
+        <h1>Periodic Table of Elements <sub>(WIP)</sub></h1>
         <button on:click={changeTheme}><span></span></button>
     </header>
 
     <Table />
 </main>
-<aside class:darkTheme>
-    <ElementInfo element={elementHovered}>
-        <h2>the infos of the hovered element</h2>
-    </ElementInfo>
-    <ElementInfo element={elementSelected}>
-        <h2>click an element to set as reference for comparison</h2>
-    </ElementInfo>
-</aside>
 <TableFilters darkTheme={darkTheme}/>
+<section class:darkTheme>
+    <ElementInfo element={elementHovered} placeholder="the infos of the hovered element" />
+    <ElementInfo element={elementSelected} placeholder="click an element to set as reference for comparison" />
+</section>
 <footer class:darkTheme>Made by <a href="https://github.com/dallgoot">Dallgoot</a> - Powered by <a href="https://svelte.dev/">Svelte</a></footer>
 
 
@@ -58,7 +55,7 @@ header
     margin-bottom 1em
     h1
         color: var(--title-color);
-        font-size: 3em;
+        font-size 3em;
         font-family: 'Patua One', cursive;
         font-weight: normal;
         text-shadow 1px 0px 10px currentColor
@@ -104,27 +101,28 @@ header
             border-radius 1.5em
             background-color var(--accent-color)
             transform translateX(100%)
-            main.darkTheme &
+            body.darkTheme main &
                 transform translateX(-17%)
 
-aside {
+section {
     grid-area: inf;
     background-color: var(--main-background)
+    border-top 2px solid var(--accent-color)
     transition background-color 800ms ease
     // background-color: darken(@background-color, 50%)
     display: inline-grid;
-    grid-template: "hover selected" 5em;
+    grid-template: "hover selected" auto;
     grid-gap: 0;
 }
-aside > section:first-child {
+section > section:first-child {
     grid-area: hover;
     grid-column: 1;
 }
-aside > section:nth-child(2) {
+section > section:nth-child(2) {
     grid-area: selected;
     grid-column: 2;
 }
-body > section:first-child {
+body > aside:first-child {
     grid-area: filtered;
 }
 footer
@@ -135,10 +133,10 @@ footer
     grid-area: footer;
     text-align: center;
     font-size: 1.2em;
-    height: 3em;
+    //height: 3em;
     color: var(--commontext-color);
     line-height 100%
-    padding-top  0.5em
+    padding  0.25em 0
     a
         font-size inherit
 

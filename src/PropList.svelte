@@ -12,31 +12,29 @@
 
 {#if Object.keys(list).length }
     {#each Object.keys(list).sort() as prop}
-        {#if typeof list[prop] === 'object'}
             <details>
                 <summary>{prop}</summary>
-                <p><svelte:self list={list[prop]} parentProp={`${parentProp}.${prop}`}/></p>
-            </details>
-        {:else}
-            <label>{prop}<span>{list[prop]}</span>
-                {#if prop !== "appearance"}
-                    <button title="filter by '{prop}'" class="filter" on:click="{() =>filterOnClick(prop, list[prop])}"></button>
+                {#if typeof list[prop] === 'object'}
+                    <p><svelte:self list={list[prop]} parentProp={`${parentProp}.${prop}`}/></p>
+                {:else}
+                    <span>{list[prop]}</span>
+                    {#if prop !== "appearance"}
+                        <button title="filter by '{prop}'" class="filter" on:click="{() =>filterOnClick(prop, list[prop])}"></button>
+                    {/if}
                 {/if}
-            </label>
-        {/if}
+            </details>
     {/each}
 {/if}
 
 
 <style type="text/stylus">
-@import "../public/global.css"
-/*details[open] details{
-    border-left: 2px solid #000;
-    padding-left: 0.25em;
-}*/
+@import "../public/global.css";
+
 details  {
     background-color: transparent;
     font-size inherit
+    display inline-block
+    float left
 }
 details[open|=""] p {
     background-color: #bbc;
@@ -44,7 +42,7 @@ details[open|=""] p {
 summary,label {
     font-weight: 500;
     cursor: pointer;
-    border-top: 1px solid var(--accent-color);
+    //border-top: 1px solid var(--accent-color);
     color: var(--commontext-color);
     transition color 800ms ease
     line-height: 1.6em;
@@ -55,7 +53,7 @@ summary:hover {
     color: var(--accent-color);
 }
 label {
-    display: block;
+    display: inline-block;
     cursor: default;
     font-size inherit
     font-weight 600
@@ -88,4 +86,5 @@ label button.filter {
 p {
     padding-left: 0.25em;
 }
+
 </style>

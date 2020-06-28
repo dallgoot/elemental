@@ -3,25 +3,24 @@
     import Filter from './Filter.svelte'
 
     let name;
-    export let darkTheme;
+    export let darkTheme = false;
 </script>
 
 
 
-
-
-<section class:darkTheme>
+<aside class:darkTheme>
 <h2>Use filter(s) to highlight element(s) with specific property</h2>
 <br />
     <Filter name="name" value="" />
     {#each $addedFilters as f}
         <Filter name="{f.name}" value="{f.value}" />
     {/each}
-</section>
+</aside>
+
 
 
 <style type="text/stylus">
-    section
+    aside
         overflow-y scroll
         background-color var(--main-background)
         transition background-color 800ms ease
