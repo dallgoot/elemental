@@ -1,6 +1,6 @@
 <script>
     import PropList from './PropList.svelte';
-    import { getMass } from "stores.js";
+    import { getMass } from "./stores.js";
     export let element = {};
     export let placeholder = ""
 
