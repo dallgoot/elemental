@@ -1,6 +1,6 @@
 <script>
     import PropList from './PropList.svelte';
-    import { getMass } from "stores";
+    import { getMass } from "stores.js";
     export let element = {};
     export let placeholder = ""
 
@@ -92,5 +92,5 @@ div article span.mass {
 }
 div section
     display inline-block
-    
+
 </style>
