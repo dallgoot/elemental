@@ -8,83 +8,84 @@
         // alert(fullnameProp)
         $addedFilters[$addedFilters.length] = {'name': fullnameProp, 'value': propValue}
     }
+    let spanClicked = false
+    function toggleSpan() {
+        console.log('toggle')
+        spanClicked = !spanClicked
+    }
 </script>
 
 {#if Object.keys(list).length }
-    {#each Object.keys(list).sort() as prop}
-            <details>
-                <summary>{prop}</summary>
-                {#if typeof list[prop] === 'object'}
-                    <p><svelte:self list={list[prop]} parentProp={`${parentProp}.${prop}`}/></p>
-                {:else}
-                    <span>{list[prop]}</span>
-                    {#if prop !== "appearance"}
-                        <button title="filter by '{prop}'" class="filter" on:click="{() =>filterOnClick(prop, list[prop])}"></button>
-                    {/if}
+    <ul>
+        {#each Object.keys(list).sort() as prop}
+        <li>
+            <strong on:click={toggleSpan}>{prop}</strong>
+            {#if typeof list[prop] === 'object'}
+                <svelte:self list={list[prop]} parentProp={`${parentProp}.${prop}`}/>
+            {:else}
+                <span class:toggled={spanClicked}>{list[prop]}</span>
+                {#if prop !== "appearance"}
+                    <button title="filter by '{prop}'" class="filter" on:click="{() =>filterOnClick(prop, list[prop])}"></button>
                 {/if}
-            </details>
-    {/each}
+            {/if}
+        </li>
+        {/each}
+    </ul>
 {/if}
 
 
 <style type="text/stylus">
 @import "../public/global.css";
 
-details  {
-    background-color: transparent;
+ul
     font-size inherit
+    display inline-flex
+    list-style none
+    
+
+li
+    strong
+        display inline-block
+        width 100% 
+        padding 0.2em 0.5em
+        line-height 1.6em
+        border 1px solid var(--commontext-color)
+        font-weight normal
+        cursor pointer
+        color var(--commontext-color)
+        transition color 800ms ease
+        font-size inherit
+        &:hover
+            transition: color 0.8s
+            color var(--accent-color)
+
+
+li > ul, li > span 
+    display none
+li > span.toggled 
+    display auto
+
+li:hover > ul 
+    display flex
+    background-color lighter(var(--accent-color))
+    
+strong
     display inline-block
-    float left
-}
-details[open|=""] p {
-    background-color: #bbc;
-}
-summary,label {
-    font-weight: 500;
-    cursor: pointer;
-    //border-top: 1px solid var(--accent-color);
-    color: var(--commontext-color);
-    transition color 800ms ease
-    line-height: 1.6em;
-    font-size inherit
-}
-summary:hover {
-    transition: color 0.8s;
-    color: var(--accent-color);
-}
-label {
-    display: inline-block;
-    cursor: default;
+    cursor default
     font-size inherit
     font-weight 600
-}
-label span:first-child:before {
-    content:" : ";
-}
-label span {
-    font-weight: normal;
-    text-align: right;
-    font-size inherit
-}
 
-label button.filter {
-    font-family: 'Font Awesome 5 Free'
+
+button.filter
+    font-family 'Font Awesome 5 Free'
+    content ''
     color var(--accent-color)
-    cursor: pointer;
-    float:right;
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
+    cursor pointer
+    width 1.5em
+    height 1.5em
     padding 0
-    // margin  0.25em 0 0 0
     margin  0
-    // border: 1px solid #777;
-    text-align: center;
-    vertical-align: middle;
-    // line-height: 1.8em
-}
-p {
-    padding-left: 0.25em;
-}
+    text-align center
+    vertical-align middle
 
 </style>

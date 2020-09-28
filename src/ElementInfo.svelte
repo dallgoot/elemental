@@ -1,14 +1,14 @@
 <script>
     import PropList from './PropList.svelte';
-    import { getMass } from "./stores.js";
+    import { getMass, notDisplayedProperties } from "./stores.js";
     export let element = {};
     export let placeholder = ""
 
-    const notDisplayedProperties = ["_id","name", 'symbol', 'filtered'];
+
 
     function elementFiltered(element) {
         let filtered = Object.assign({}, element);
-        notDisplayedProperties.forEach((v) => {
+        $notDisplayedProperties.forEach((v) => {
          delete filtered[v];
         });
         return filtered;
@@ -17,6 +17,7 @@
 </script>
 
 <div class:empty={!Object.keys(element).length}>
+<!-- <div > -->
     {#if !Object.keys(element).length}
         <h2>{placeholder}</h2>
     {:else}
@@ -36,8 +37,10 @@
 @import "../public/global.css"
 div
     &.empty
-        display block
+        display flex
         text-align center
+        align-items  center
+        align-content: center;
     display inline-grid
     grid-template-columns 1fr 8fr
     padding-left 0.5em
@@ -49,9 +52,9 @@ div
     transition color 800ms ease
     font-size 1.1em
     vertical-align top
+    text-align center
+    align-content: center;
     h2
-        display inline
-        vertical-align middle
 
         height 100%
         font-size 2em

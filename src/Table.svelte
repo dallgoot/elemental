@@ -1,13 +1,13 @@
 <script>
-//    import { selectedElement } from './stores.js';
     import Element from './Element.svelte';
-    import {table, getMass} from './stores.js'
+    import {getMass} from './stores.js'
 
+    export let elements = [];
 </script>
 
 
 <div>
-    {#each $table as row, r}
+    {#each elements as row, r}
         {#each row as element, i ("id" + r + i)}
             {#if element === undefined}
                 <section class="empty"></section>

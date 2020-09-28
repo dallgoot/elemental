@@ -1,5 +1,5 @@
 <script>
-    import { selectedElement, hoveredElement } from './stores.js';
+    import { elementsById, selectedElement, hoveredElement } from './stores.js';
 
     export let protons = '';
     export let symbol  = '';
@@ -20,7 +20,7 @@
 </script>
 
 
-<button bind:this={current} class:selected class:filtered={filtered} on:click={onclick} on:mouseover={onhover}>
+<button bind:this={current} class:selected class:filtered={$elementsById[id].filtered} on:click={onclick} on:mouseover={onhover}>
     <span class="protons">{protons}</span>
     <strong>{symbol}</strong>
     <span class="name">{name}</span>
@@ -31,9 +31,8 @@
 <style type="text/stylus">
 @import "../public/global.css"
 
-button, button :focus
+button, button:focus
     display inline-block
-    vertical-align top
     overflow hidden
     text-align left
     background var(--element-bg)
@@ -61,48 +60,49 @@ button
         transform scale(1.4)
         transition-timing-function cubic-bezier(0.735, 0.055, 0.645, 0.960)
         transition transform 0.8s, box-shadow 0.8s, opacity 0.8s, z-index 0.8s
-        box-shadow 1px 10px 15px 3px rgba(24, 24, 24, 0.75)
+        box-shadow 1px 10px 15px 3px rgba(24, 24, 24, 0.55)
         border 1px solid #fff
         outline none
     &.selected
         box-shadow inset 0px 0px 25px var(--accent-color)
         border 1px solid var(--accent-color)
         &:hover
-            box-shadow inset 0px 0px 25px var(--accent-color),1px 10px 15px 3px rgba(24, 24, 24, 0.75)
+            box-shadow inset 0px 0px 25px var(--accent-color),1px 10px 15px 3px rgba(24, 24, 24, 0.55)
 
 
 
 
 button
+    display flex
+    flex-flow column
     & span
         display block
         line-height 0.5rem
         font-size 0.9rem
         /*padding 0.1rem*/
     & .protons
-        font-size 0.7rem
+        font-size 0.75rem
         line-height 0.25rem
         float left
         padding 0.5em 0
     & strong
         font-family 'Patua One', cursive
         font-weight normal
-        font-size 2rem
+        font-size 2.1rem
         text-align center
         display block
         line-height 1.6rem
         text-transform capitalize
         clear left
         position relative
-        top -0.15em
+        top -0.25em
 
     & .name
-        font-size 0.8rem
+        font-size 1rem
         line-height 0.5rem
         transition font-size 0.8s
     & .mass
-        display block
-        text-align center
+        text-align right
         line-height 0.75rem
         font-size 0.50rem
 

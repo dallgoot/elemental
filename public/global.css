@@ -26,12 +26,10 @@ body {
 	display: grid;
     grid-template-areas:
         "tab filtered"
-        "tab filtered"
-        "inf inf"
         "inf inf"
         "footer footer";
     grid-template-columns: 7fr 1.5fr;
-    grid-template-rows: 6fr 3fr 1.5em;
+    grid-template-rows: 10fr 3fr 1.5em;
     grid-gap: 0;
 
     padding:0;

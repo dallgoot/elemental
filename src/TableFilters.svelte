@@ -2,13 +2,11 @@
     import { addedFilters } from './stores.js';
     import Filter from './Filter.svelte'
 
-    let name;
-    export let darkTheme = false;
 </script>
 
 
 
-<aside class:darkTheme>
+<aside>
 <h2>Use filter(s) to highlight element(s) with specific property</h2>
 <br />
     <Filter name="name" value="" />

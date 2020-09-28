@@ -1,12 +1,20 @@
     import { writable, readable } from 'svelte/store';
 
-    export let selectedElement = writable(false);
+    export let elementsById = writable({});
 
-    export let hoveredElement = writable(false);
+    export let selectedElement = writable(0);
+    export let hoveredElement = writable(0);
+
 
     export let addedFilters = writable([]);
 
-    export let table = writable([]);
+
+    export const notDisplayedProperties = readable(["_id", "name", 'symbol', 'filtered']);
+
+
+
+
+
 
     const filters = { "name" : function (elementValue, filterValue) {
                         return elementValue.indexOf(filterValue) === -1;
@@ -25,4 +33,4 @@
             return parseInt(element.mechanical.mass);
           }
           return "?";
-        }
+    }
