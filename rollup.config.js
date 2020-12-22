@@ -7,8 +7,8 @@ import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 
-// const production = !process.env.ROLLUP_WATCH;
-const production = false;
+const production = !process.env.ROLLUP_WATCH;
+
 
 export default {
 	input: 'src/main.ts',
