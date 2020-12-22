@@ -1,14 +1,17 @@
-<script>
+<script lang="ts">
+    import { selectedElement } from '../stores';
+
+    import type { Elemental } from '../types/common/elemental';
+    import { getMass, notDisplayedProperties } from "../global";
+
     import PropList from './PropList.svelte';
-    import { getMass, notDisplayedProperties } from "./stores.js";
-    export let element = {};
-    export let placeholder = ""
+
+    // let element: Elemental;
 
 
-
-    function elementFiltered(element) {
+    function cleanElement(element) {
         let filtered = Object.assign({}, element);
-        $notDisplayedProperties.forEach((v) => {
+        notDisplayedProperties.forEach((v) => {
          delete filtered[v];
         });
         return filtered;
@@ -16,48 +19,47 @@
 
 </script>
 
-<div class:empty={!Object.keys(element).length}>
-<!-- <div > -->
-    {#if !Object.keys(element).length}
-        <h2>{placeholder}</h2>
+<div class:empty={$selectedElement === null}>
+    {#if $selectedElement === null}
+        <slot />
     {:else}
         <article>
-            <span class="protons">{element.atomic.number}</span>
-            <strong>{element.symbol || element.name.substring(0,2)}</strong>
-            <span class="name">{element.name}</span>
-            <span class="mass">{getMass(element)}</span>
+            <span class="protons">{$selectedElement.atomic.number}</span>
+            <strong>{$selectedElement.symbol || $selectedElement.name.substring(0,2)}</strong>
+            <span class="name">{$selectedElement.name}</span>
+            <span class="mass">{getMass($selectedElement)}</span>
         </article>
         <section>
-            <PropList list={elementFiltered(element)} />
+            <PropList list={cleanElement($selectedElement)} />
         </section>
     {/if}
 </div>
 
 <style type="text/stylus">
-@import "../public/global.css"
+
 div
+    width 30%
+    grid-area: info;
+    padding 1em
     &.empty
         display flex
         text-align center
         align-items  center
         align-content: center;
-    display inline-grid
-    grid-template-columns 1fr 8fr
+    display: flex;
+    flex-flow column
+    grid-gap 0;
+    align-content: center;
+    border-top 2px solid var(--accent-color)
     padding-left 0.5em
     padding-top 0.5em
     overflow-y auto
-    height inherit
-    grid-row  1 / 2
     color var(--commontext-color)
     transition color 800ms ease
     font-size 1.1em
     vertical-align top
     text-align center
-    align-content: center;
-    h2
 
-        height 100%
-        font-size 2em
 
 div article {
     border: 1px solid var(--accent-color);
@@ -67,11 +69,10 @@ div article {
     text-align: center;
     box-shadow: 1px 0px 5px 0px #777,inset 0px -15px 30px 0px rgba(100,100,100,0.75);
     display: inline-block;
-    margin: 1em 1em;
+    margin: 1em auto;
 }
 div article span.protons {
     float:left;
-    /*line-height: 1.2rem;*/
     display: inline-block;
     padding: 0.25em;
 }

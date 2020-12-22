@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=woff2');
+@import url('https://fonts.googleapis.com/css?family=Patua+One&display=woff2');
+@import url('./all.min.css');
+@import url('./solid.css');
+
+*{
+    padding:0;
+    margin:0;
+    /*-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;*/
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size:14px;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+    padding:0;
+    margin: 0;
+}
+.darkTheme {
+    --commontext-color: rgba(255,255,255,0.85);
+    --accent-color: #49b;
+    --main-background:#334;
+    --title-color: var(--commontext-color);
+    --element-bg:linear-gradient(0deg, rgba(239,244,250,0.4) 0%, rgba(255,255,255,0.25) 25%, rgba(226,236,246,0.6) 100%);
+    /* --element-border-color:rgba(255,255,255,0.3); */
+}
+:root {
+    --commontext-color: rgba(50,50,50,0.75);
+    --accent-color: rgb(68, 133, 187);
+    /* --main-background:linear-gradient(0deg, rgba(239,244,250,0.4) 0%, rgba(255,255,255,0.25) 25%, rgba(226,236,246,0.6) 100%); */
+    --main-background:linear-gradient(0deg, rgba(143, 147, 167, 0.4) 0%, rgba(80, 80, 80, 0.25) 25%, rgba(248,248,246,0.6) 100%);
+    --title-color: var(--accent-color);
+    --element-bg:linear-gradient(0deg, rgba(143, 147, 167, 0.4) 0%, rgba(80, 80, 80, 0.25) 25%, rgba(248,248,246,0.6) 100%);
+    /* --element-border-color:rgba(0,0,0,0.5); */
+    --element-border-color: transparent;
+}
+body {
+    background: var(--main-background);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.8s;
+}
+
+a, a:visited {
+    color: var(--accent-color);
+}
